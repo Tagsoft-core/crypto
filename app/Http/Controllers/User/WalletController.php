@@ -120,11 +120,13 @@ class WalletController extends Controller
         $user = Auth::user();
         $wallet = $user->getWallet($slug);
 
-        $this->getCurrencies($wallet, $request);
-        $exchange = $this->convertAmount($request);
-
         $toUser = User::where('email', '=', $request->user)->first();
         $transferToWallet = $toUser->getWallet($request->wallet);
+
+        $this->getCurrencies($wallet, $transferToWallet);
+        $exchange = $this->convertAmount($request);
+
+
 
         try {
             $wallet->transferFloat($transferToWallet, $exchange['rate']);
@@ -179,7 +181,7 @@ class WalletController extends Controller
         $wallet = $user->getWallet($slug);
         $exchangeWallet = $user->getWallet($request->wallet);
 
-        $this->getCurrencies($wallet, $request);
+        $this->getCurrencies($wallet, $exchangeWallet);
         $exchange = $this->convertAmount($request);
 
         try {
@@ -206,9 +208,9 @@ class WalletController extends Controller
         return $exchange;
     }
 
-    private function getCurrencies($wallet, $request)
+    private function getCurrencies($wallet, $transferToWallet)
     {
-        $this->currencies['fromCurrency'] = Currency::where('code', $wallet->slug)->first();
-        $this->currencies['toCurrency'] = Currency::where('code', $request->wallet)->first();
+        $this->currencies['fromCurrency'] = Currency::where('code', $wallet->meta['currency'])->first();
+        $this->currencies['toCurrency'] = Currency::where('code', $transferToWallet->meta['currency'])->first();
     }
 }
