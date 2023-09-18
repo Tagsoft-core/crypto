@@ -20,6 +20,23 @@
             <ul class="nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" id="appsDropdown" data-toggle="dropdown" aria-expanded="false">
+                        <i class="mdi mdi-bell mdi-1x"></i>
+                    </a>
+                    <div class="dropdown-menu navbar-dropdown dropdown-menu-right" aria-labelledby="appsDropdown">
+                        <div class="dropdown-header">
+                            <h6 class="dropdown-title">Notifications</h6>
+                        </div>
+                        <div class="dropdown-body border-top pt-0">
+                            <a href="#" class="dropdown-list">
+                                <i class="grid-icon mdi mdi-bell-circle mdi-2x"></i>
+                                <span class="grid-tittle">New User is registered on system.</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" id="appsDropdown" data-toggle="dropdown" aria-expanded="false">
                         <i class="mdi mdi-apps mdi-1x"></i>
                     </a>
                     <div class="dropdown-menu navbar-dropdown dropdown-menu-right" aria-labelledby="appsDropdown">

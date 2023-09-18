@@ -22,11 +22,11 @@
                     <h4>{{$wallet->name}}</h4>
                 </div>
                 <div class="clearfix"></div>
-                <div class="col-md-6 section2sa withd" >
+                <div class="col-md-8 section2sa withd" >
                     <form action="{{route('make-withdraw')}}" method="post">
                         @csrf
                         <h2>Your Balance:</h2>
-                        <h1>{{$wallet->balanceFloat}} {{strtoupper($wallet->slug)}}</h1>
+                        <h1>{{$wallet->balanceFloat}} <br>{{strtoupper($wallet->slug)}}</h1>
 
                         @if($errors->has('error'))
                             <div class="alert-danger">{{ $errors->first('error') }}</div>
@@ -49,7 +49,7 @@
                     <a href="{{route('request.transaction.logs', $wallet->slug)}}" class="btn btn-dark can text-black">Request Transaction Logs</a>
                     <hr>
                 </div>
-                <div class="col-md-6 bit-sec">
+                <div class="col-md-4 bit-sec">
                     @php
                         $image = '';
                             if (strpos($wallet->slug, "usdt") !== false){

@@ -24,6 +24,7 @@
     <div class="section2s" style="padding: 85px 0px;" >
         <div class="container">
             <div class="row">
+                <h4><a style="text-align: left; text-decoration: none" href="#">Notifications: (0)</a></h4>
                 @include('layouts.alert')
                 <div class="col-md-6 section2sa" data-aos="fade-left" data-aos-duration="500">
                     <h4>TOTAL BALANCE</h4>
@@ -34,7 +35,7 @@
                         @if($item !== null )
                             <div class="box1">
                                 <h4>{{$item->name}}</h4>
-                                <h2>{{$item->balanceFloat}} {{strtoupper($item->slug)}}</h2>
+                                <h2>{{$item->balanceFloat}} <br><small style="color: white;">{{strtoupper($item->slug)}}</small></h2>
                                 {{--<h2>= 0 USD</h2>--}}
                                 {{--<p>1 BTC = 0.999798</p>--}}
                                 <div class="row">

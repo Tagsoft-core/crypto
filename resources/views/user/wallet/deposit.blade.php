@@ -22,11 +22,11 @@
                     <h4>{{$wallet->name}}</h4>
                 </div>
                 <div class="clearfix"></div>
-                <div class="col-md-6 section2sa withd" >
+                <div class="col-md-8 section2sa withd" >
                     <form action="{{route('make-deposit', $wallet->slug)}}" method="post">
                         @csrf
                         <h2>Your Balance:</h2>
-                        <h1>{{$wallet->balanceFloat}} {{strtoupper($wallet->slug)}}</h1>
+                        <h1>{{$wallet->balanceFloat}} <br>{{strtoupper($wallet->slug)}}</h1>
 
                         <label for="amount">Amount</label>
                         <input step="any" required name="amount" type="number">
@@ -55,7 +55,7 @@
                     <a href="{{route('request.transaction.logs', $wallet->slug)}}" class="btn btn-dark can text-black">Request Transaction Logs</a>
                     <hr>
                 </div>
-                <div class="col-md-6 bit-sec" style="padding-top: 170px;">
+                <div class="col-md-4 bit-sec" style="padding-top: 170px;">
                     @php
                         $image = '';
                             if (strpos($wallet->slug, "usdt") !== false){
