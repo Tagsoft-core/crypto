@@ -70,7 +70,7 @@
                         </div>
 
                         <label for="from">Amount</label>
-                        <input id="amount" name="amount" type="number">
+                        <input id="amount" name="amount" type="number" step="any">
                         <input id="from" name="from" value="USDT" type="hidden">
                         <input id="to" name="to" value="LTC" type="hidden">
 
