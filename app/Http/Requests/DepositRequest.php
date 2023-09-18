@@ -24,7 +24,7 @@ class DepositRequest extends FormRequest
     public function rules()
     {
         return [
-            'user'        => ['required', 'exists:users,id'],
+            'user'        => ['nullable', 'exists:users,id'],
             'amount'      => ['required', 'numeric', 'min:1'],
             'wallet_slug' => ['required', 'string', 'max:255'],
         ];
