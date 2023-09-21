@@ -21,7 +21,7 @@
                     @include('layouts.alert')
                     <div class="grid">
                         <p class="grid-header">{{$wallet->name}}</p>
-                        <p class="grid-header">Balance: {{$wallet->balance}}</p>
+                        <p class="grid-header">Balance: {{sprintf('%.2f', $wallet->balance / 100)}}</p>
                         <div class="grid-body">
                             <div class="item-wrapper">
                                 <div class="row">

@@ -34,7 +34,7 @@
                                                     <label for="inputAmount">Amount</label>
                                                 </div>
                                                 <div class="col-md-9 showcase_content_area">
-                                                    <input name="amount" type="number" class="form-control form-control-lg" id="inputAmount" value="0">
+                                                    <input name="amount" type="number" class="form-control form-control-lg" id="inputAmount" value="0" step="any">
                                                 </div>
                                             </div>
                                             <hr>

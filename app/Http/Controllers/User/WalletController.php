@@ -126,8 +126,6 @@ class WalletController extends Controller
         $this->getCurrencies($wallet, $transferToWallet);
         $exchange = $this->convertAmount($request);
 
-
-
         try {
             $wallet->transferFloat($transferToWallet, $exchange['rate']);
         } catch (\Exception $e) {

@@ -34,7 +34,7 @@
                       </span>
                                 </div>
                                 <div class="d-flex align-items-end mt-2">
-                                    <h3>{{$wallet->balance}}</h3>
+                                    <h3>{{sprintf('%.2f', $wallet->balance / 100)}}</h3>
                                     <p class="ml-1 font-weight-bold">{{$wallet->currency}}</p>
                                 </div>
                                 <div class="d-flex mt-2">
@@ -65,7 +65,7 @@
                                     @endphp
                                     <div class="d-flex justify-content-between border-bottom py-2">
                                         <p class="text-black">{{ucfirst($transaction->type)}} {{$wallet->currency}}</p>
-                                        <p class="text-gray">{{$transaction->amount}} {{$wallet->currency}}</p>
+                                        <p class="text-gray">{{sprintf('%.2f', $transaction->amount / 100)}} {{$wallet->currency}}</p>
                                     </div>
 
                                     @php

@@ -52,7 +52,7 @@ class WalletController extends Controller
         $wallet = $user->getWallet($request->wallet_slug);
 
         try {
-            $wallet->withdraw($request->amount);
+            $wallet->withdrawFloat($request->amount);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -88,7 +88,7 @@ class WalletController extends Controller
         $wallet = $user->getWallet($request->wallet_slug);
 
         try {
-            $wallet->deposit($request->amount);
+            $wallet->depositFloat($request->amount);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -122,7 +122,7 @@ class WalletController extends Controller
         $wallet = $user->getWallet($request->wallet_slug);
 
         try {
-            $wallet->deposit($request->amount);
+            $wallet->transferFloat($request->amount);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
