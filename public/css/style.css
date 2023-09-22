@@ -128,7 +128,7 @@ h1,h2,h3,h4,h5,h6,p,a,i,li{
     display: inline-block;
     margin-bottom: 10px;
 }
-.section2s input[type="text"], .section2s input[type="password"], .section2s input[type="number"], .section2s input[type="email"] {
+.section2s input[type="text"], input[type="date"], .section2s input[type="password"], .section2s input[type="number"], .section2s input[type="email"] {
     padding: 10px;
     border: 1px solid lightgrey;
     margin-bottom: 20px;

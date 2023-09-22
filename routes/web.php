@@ -29,6 +29,12 @@ Route::get('2fa/reset', [App\Http\Controllers\TwoFAController::class, 'resend'])
 Route::get('/home', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('home');
 Route::get('/dashboard', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('dashboard');
 
+Route::name('profile.')->prefix('profile')->group(function () {
+    Route::get('/',[\App\Http\Controllers\ProfileController::class,'index'])->name('index');
+    Route::post('/{user}',[\App\Http\Controllers\ProfileController::class,'update'])->name('update');
+    Route::get('de-activate/{user}',[\App\Http\Controllers\ProfileController::class,'destroy'])->name('destroy');
+});
+
 Route::get('/request-transaction-logs/{id}', [App\Http\Controllers\User\WalletController::class, 'requestTransactionLogs'])->name('request.transaction.logs');
 
 Route::get('/withdraw/{id}', [App\Http\Controllers\User\WalletController::class, 'withdraw'])->name('withdraw');
