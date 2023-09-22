@@ -16,7 +16,9 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('user.profile.index')->with(compact('user'));
+        $notifications = $user->notificationSettings;
+
+        return view('user.profile.index')->with(compact('user', 'notifications'));
     }
 
     /**
@@ -24,7 +26,7 @@ class ProfileController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  User $user
-     * @param Request$request
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(User $user, Request $request)
@@ -40,6 +42,30 @@ class ProfileController extends Controller
             'phone' => $request->phone,
             'dob'   => $request->dob
         ]);
+
+        if ($request->notification) {
+            $notification = $request->notification;
+
+            if (!isset($request->notification['email'])) {
+                $notification['email'] = 0;
+            }
+
+            if (!isset($request->notification['sms'])) {
+                $notification['sms'] = 0;
+            }
+
+            if (!isset($request->notification['ui'])) {
+                $notification['ui'] = 0;
+            }
+        } else {
+            $notification = [
+                'email' => 0,
+                'sms'   => 0,
+                'ui'    =>0,
+            ];
+        }
+
+        $user->notificationSettings()->update($notification);
 
         return redirect()->back()->with(['success' => 'Update success']);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserNotificationSettings;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -75,6 +76,10 @@ class RegisterController extends Controller
         ]);
 
         $this->createWallet($user);
+
+        UserNotificationSettings::create([
+            'user_id' => $user->id
+        ]);
 
         return $user;
     }

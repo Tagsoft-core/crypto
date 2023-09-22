@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\UserNotificationSettings;
 use Faker\Core\Number;
 use Illuminate\Database\Seeder;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -69,6 +70,7 @@ class UserSeeder extends Seeder
                 'image' => 'images/ltc.png',
                 'meta' => ['currency' => 'LTC'],
             ]);
+
         $user->createWallet(
             [
                 'name' => 'USDT (USD Omni)',
@@ -76,5 +78,7 @@ class UserSeeder extends Seeder
                 'image' => 'images/usdt.png',
                 'meta' => ['currency' => 'USDT'],
             ]);
+
+        UserNotificationSettings::create(['user_id' => $user]);
     }
 }

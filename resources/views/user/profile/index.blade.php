@@ -74,12 +74,35 @@
                             </span>
                         @endif
 
+                        <h2>Notification Settings</h2>
+                        <div class="display-inline-flex">
+                            <label class="pr-10" for="email">Email: </label>
+                            <input id="email" class="pr-10" name="notification[email]" value="1" type="checkbox" {{($notifications->email == 1)? 'checked' : '' }}>
+                        </div>
+                        <div class="display-inline-flex">
+                            <label class="pr-10" for="dashboard">Dashboard: </label>
+                            <input id="dashboard" class="pr-10" name="notification[ui]" value="1" type="checkbox" {{($notifications->ui == 1)? 'checked' : '' }}>
+                        </div>
+                        <div class="display-inline-flex">
+                            <label class="pr-10" for="sms">SMS: </label>
+                            <input id="sms" name="notification[sms]" type="checkbox" value="1" {{($notifications->sms == 1)? 'checked' : '' }}>
+                        </div>
+
                         <button type="submit">Update</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <style>
+        .display-inline-flex {
+            display: inline-flex;
+        }
+
+        .pr-10 {
+            padding-right: 10px;
+        }
+    </style>
 @endsection
 
 @section('scripts')

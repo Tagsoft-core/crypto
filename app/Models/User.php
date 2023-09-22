@@ -52,7 +52,7 @@ class User extends Authenticatable implements Wallet, WalletFloat
     ];
 
     /**
-     * Write code on Method
+     * Generate unique code for two fa
      *
      * @return null
      */
@@ -89,4 +89,11 @@ class User extends Authenticatable implements Wallet, WalletFloat
         return $randomString;
     }
 
+    /**
+     * User Notification Settings
+     */
+    public function notificationSettings()
+    {
+        return $this->hasOne(UserNotificationSettings::class);
+    }
 }
