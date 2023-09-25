@@ -40,7 +40,11 @@ class WithdrawSuccessful extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        $array = ['database'];
+        if ($this->settings->email == 1)
+            $array = array_merge($array, ['mail']);
+
+        return $array;
     }
 
     /**
@@ -52,8 +56,9 @@ class WithdrawSuccessful extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
+            ->greeting('Hello,')
+            ->line('Your withdraw of '. $this->amount.', to wallet:'. $this->wallet .' was successful')
+            ->action('View dashboard', url('/'))
             ->line('Thank you for using our application!');
     }
 
@@ -66,7 +71,7 @@ class WithdrawSuccessful extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'data' =>' Your withdraw of '. $this->amount.', to wallet:'. $this->wallet .' was successful'
+            'data' => 'Your withdraw of '. $this->amount.', to wallet:'. $this->wallet .' was successful'
         ];
     }
 }

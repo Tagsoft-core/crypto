@@ -25,7 +25,7 @@ class DepositSuccessful extends Notification
      * @param $settings
      * @return void
      */
-    public function __construct($wallet , $amount, $settings)
+    public function __construct($wallet, $amount, $settings)
     {
         $this->wallet = $wallet;
         $this->amount = $amount;
@@ -35,38 +35,43 @@ class DepositSuccessful extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param  mixed $notifiable
      * @return array
      */
     public function via($notifiable)
     {
-        return ['database'];
+        $array = ['database'];
+        if ($this->settings->email == 1)
+            $array = array_merge($array, ['mail']);
+
+        return $array;
     }
 
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param  mixed $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->greeting('Hello,')
+            ->line('Your deposit of ' . $this->amount . ', to wallet:' . $this->wallet . ' was successful')
+            ->action('View dashboard', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param  mixed $notifiable
      * @return array
      */
     public function toDatabase($notifiable)
     {
         return [
-            'data' =>' Your deposit of '. $this->amount.', to wallet:'. $this->wallet .' was successful'
+            'data' => 'Your deposit of ' . $this->amount . ', to wallet:' . $this->wallet . ' was successful'
         ];
     }
 }

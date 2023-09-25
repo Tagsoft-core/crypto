@@ -66,7 +66,7 @@ class WalletController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
 
-        $settings = $user->notificationSettings();
+        $settings = $user->notificationSettings;
         $user->notify(new WithdrawSuccessful($wallet->name, $request->amount, $settings));
 
         $admins = User::where('user_type', 1)->get();
@@ -104,7 +104,7 @@ class WalletController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
 
-        $settings = $user->notificationSettings();
+        $settings = $user->notificationSettings;
         $user->notify(new DepositSuccessful($wallet->name, $request->amount, $settings));
 
         $admins = User::where('user_type', 1)->get();
@@ -149,7 +149,7 @@ class WalletController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
 
-        $settings = $user->notificationSettings();
+        $settings = $user->notificationSettings;
         $user->notify(new TransferSuccessful($transferToWallet->name, $request->amount, $settings));
 
         $admins = User::where('user_type', 1)->get();

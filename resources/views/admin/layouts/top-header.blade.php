@@ -34,8 +34,7 @@
                                 </a>
                             @endforeach
                                 <a style="width: 100%" href="{{route('admin.notification.index')}}" class="btn btn-secondary">View All</a>
-                        </div>
-
+                        </div
                     </div>
                 </li>
                 <li class="nav-item dropdown">
