@@ -78,7 +78,6 @@ class ProfileController extends Controller
      */
     public function destroy(User $user)
     {
-
         return redirect()->back()->with(['success' => 'De activate success']);
     }
 }

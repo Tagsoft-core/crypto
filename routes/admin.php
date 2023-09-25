@@ -34,6 +34,12 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'isAdmin'], 'pref
     Route::get('/user/show/{id}', [App\Http\Controllers\Admin\UserController::class, 'show'])->name('user.show');
     Route::post('/user/edit/{id}', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('user.edit');
     Route::get('/user/wallets/{id}', [App\Http\Controllers\Admin\UserController::class, 'wallets'])->name('user.wallets');
+
+    Route::name('admin.notification.')->prefix('notifications')->group(function () {
+        Route::get('/', [\App\Http\Controllers\NotificationController::class, 'adminNotifications'])->name('index');
+        Route::get('mark-as-read/{id}', [\App\Http\Controllers\NotificationController::class, 'adminMarkNotification'])->name('mark');
+        Route::get('/mark-as-read', [App\Http\Controllers\NotificationController::class,'adminMarkAsRead'])->name('mark-read');
+    });
 });
 
 

@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Mail\TransactionLogsMail;
 use App\Models\Currency;
 use App\Models\User;
+use App\Notifications\admin\UserWalletActions;
+use App\Notifications\DepositSuccessful;
+use App\Notifications\TransferSuccessful;
+use App\Notifications\WithdrawSuccessful;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -15,6 +19,7 @@ use App\Http\Requests\DepositRequest;
 use App\Http\Requests\TransferRequest;
 use App\Http\Requests\ExchangeRequest;
 use Auth;
+use Notification;
 
 class WalletController extends Controller
 {
@@ -61,6 +66,12 @@ class WalletController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
 
+        $settings = $user->notificationSettings();
+        $user->notify(new WithdrawSuccessful($wallet->name, $request->amount, $settings));
+
+        $admins = User::where('user_type', 1)->get();
+        Notification::send($admins, new UserWalletActions($user, $wallet->name, $request->amount, 'withdraw'));
+
         return redirect()->back()->with(['success' => 'Withdraw success']);
     }
 
@@ -92,6 +103,12 @@ class WalletController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
+
+        $settings = $user->notificationSettings();
+        $user->notify(new DepositSuccessful($wallet->name, $request->amount, $settings));
+
+        $admins = User::where('user_type', 1)->get();
+        Notification::send($admins, new UserWalletActions($user, $wallet->name, $request->amount, 'deposit'));
 
         return redirect()->back()->with(['success' => 'Deposit success']);
     }
@@ -131,6 +148,12 @@ class WalletController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
+
+        $settings = $user->notificationSettings();
+        $user->notify(new TransferSuccessful($transferToWallet->name, $request->amount, $settings));
+
+        $admins = User::where('user_type', 1)->get();
+        Notification::send($admins, new UserWalletActions($user, $transferToWallet->name, $request->amount, 'transfer'));
 
         return redirect()->back()->with(['success' => 'Transfer success']);
     }

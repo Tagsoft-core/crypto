@@ -35,6 +35,12 @@ Route::name('profile.')->prefix('profile')->group(function () {
     Route::get('de-activate/{user}',[\App\Http\Controllers\ProfileController::class,'destroy'])->name('destroy');
 });
 
+Route::name('notification.')->prefix('notifications')->group(function () {
+    Route::get('/', [\App\Http\Controllers\NotificationController::class, 'index'])->name('index');
+    Route::get('mark-as-read/{id}', [\App\Http\Controllers\NotificationController::class, 'markNotification'])->name('mark');
+    Route::get('/mark-as-read', [App\Http\Controllers\NotificationController::class,'markAsRead'])->name('mark-read');
+});
+
 Route::get('/request-transaction-logs/{id}', [App\Http\Controllers\User\WalletController::class, 'requestTransactionLogs'])->name('request.transaction.logs');
 
 Route::get('/withdraw/{id}', [App\Http\Controllers\User\WalletController::class, 'withdraw'])->name('withdraw');

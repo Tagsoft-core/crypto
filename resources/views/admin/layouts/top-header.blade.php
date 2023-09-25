@@ -24,13 +24,16 @@
                     </a>
                     <div class="dropdown-menu navbar-dropdown dropdown-menu-right" aria-labelledby="appsDropdown">
                         <div class="dropdown-header">
-                            <h6 class="dropdown-title">Notifications</h6>
+                            <h6 class="dropdown-title">Notifications ({{auth()->user()->unreadNotifications->count()}})</h6>
                         </div>
                         <div class="dropdown-body border-top pt-0">
-                            <a href="#" class="dropdown-list">
-                                <i class="grid-icon mdi mdi-bell-circle mdi-2x"></i>
-                                <span class="grid-tittle">New User is registered on system.</span>
-                            </a>
+                            @foreach (auth()->user()->unreadNotifications as $notification)
+                                <a href="#" class="dropdown-list">
+                                    <i class="grid-icon mdi mdi-bell-circle mdi-2x pr-2"></i>
+                                    <small class="grid-tittle">{{$notification->data['data']}}</small>
+                                </a>
+                            @endforeach
+                                <a style="width: 100%" href="{{route('admin.notification.index')}}" class="btn btn-secondary">View All</a>
                         </div>
 
                     </div>

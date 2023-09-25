@@ -25,7 +25,7 @@
     <div class="section2s" style="padding: 85px 0px;" >
         <div class="container">
             <div class="row">
-                <h4><a style="text-align: left; text-decoration: none" href="#">Notifications: (0)</a></h4>
+                <h4><a style="text-align: left; text-decoration: none" href="{{route('notification.index')}}">Notifications: ({{auth()->user()->unreadNotifications->count()}})</a></h4>
                 @include('layouts.alert')
                 <div class="col-md-6 section2sa" data-aos="fade-left" data-aos-duration="500">
                     <h4>TOTAL BALANCE</h4>
@@ -58,7 +58,6 @@
                             </div>
                         @endif
                     @endforeach
-
                 </div>
                 <div class="col-md-6" data-aos="fade-right" data-aos-duration="500">
                     <form id="exchanger-form" action="#" method="post">

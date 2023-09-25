@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\UserNotificationSettings;
+use App\Notifications\admin\UserRegistered;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Notification;
 
 class RegisterController extends Controller
 {
@@ -80,6 +82,9 @@ class RegisterController extends Controller
         UserNotificationSettings::create([
             'user_id' => $user->id
         ]);
+
+        $admins = User::where('user_type', 1)->get();
+        Notification::send($admins, new UserRegistered($user));
 
         return $user;
     }
